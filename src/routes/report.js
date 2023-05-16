@@ -1,69 +1,64 @@
+/* Developers details:
+   - Karin Ochayon, 207797002
+   - Dor Uzan, 205890510
+*/
+
 const express = require("express");
-const costsModel = require("../db/costsmodel")
-const {categories} = require("../constants");
-const reportValidations = require("../validations/reportvalidations");
+const costsModel = require("../db/costsmodel"); 
+const { categories } = require("../constants"); 
+const reportValidations = require("../validations/reportvalidations"); 
 
-const reportRouter = express.Router();
+// Creating an Express router for handling report requests.
+const reportRouter = express.Router(); 
 
-reportRouter.get("/", async (req, res, next) => {
+// Handling GET requests to the root path ("/") of the report route.
+reportRouter.get("/", async (req, res, next) => { 
   try {
-    const validations = reportValidations.validate(req.query);
-
-    if(validations.error){
-      validations.error.status = 400;
-      throw validations.error;
+    // Validating the request query parameters using the report validations.
+    const validations = reportValidations.validate(req.query); 
+    // If there is a validation error set the status code to 400 (bad request) and throw error.
+    if (validations.error) { 
+      validations.error.status = 400; 
+      throw validations.error; 
     }
 
-    const costs = await costsModel.find(req.query);
+    // Retrieving costs from the database based on the query parameters.
+    const costs = await costsModel.find(req.query); 
 
-
-    if(!costs.length){
-      validations.error.status = 400;
-      throw new Error("No costs found for this specific query");
+    // If no costs are found set the status code to 400 (bad request) and throw error.
+    if (!costs.length) { 
+      validations.error.status = 400; 
+      throw new Error("No costs found for this specific query"); 
     }
 
-    const result = {};
-    categories.forEach(category => {
-      result[category] = [];
+    /* Here is the implmention of the "computed" design pattern.
+    This code demonstrates the computed design pattern by performing computations and
+    transforming the retrieved costs data into a structured format (result object)
+    that can be utilized for further processing or responding to client requests.*/
+
+    // Creating an empty object to store the computed result.
+    const result = {}; 
+    // Iterating through each category and initializing an empty array for each category in the result object.
+    categories.forEach((category) => { 
+      result[category] = []; 
     });
 
-    costs.forEach(cost => {
-      const costItem = {
+    // Iterating through each cost and creating a cost item object with selected properties
+    costs.forEach((cost) => { 
+      const costItem = { 
         day: cost.day,
         sum: cost.sum,
         description: cost.description,
-      }
-
-      result[cost.category].push(costItem);
+      };
+      // Adding the cost item to the corresponding category array in the result object
+      result[cost.category].push(costItem); 
     });
-    
-    res.json(result);
+    // Sending a JSON response with the computed result and Pass any caught error to the error-handling middleware
+    res.json(result); 
   } catch (error) {
     next(error);
   }
 });
 
-
-module.exports = reportRouter;
-
-
-// demonstrates the implementation of the computed design pattern in your Express.js and MongoDB project.
-
-// In the code, you are retrieving data from the MongoDB database using costsModel.find() based on the req.query. Then, you are performing a computation/transformation on the retrieved costs data.
-
-// Here's a breakdown of how the computed design pattern is applied:
-
-// You check if there are any costs retrieved from the database (if (!costs.length)). If there are no costs found, you throw an error indicating that no costs were found for the specific query.
-
-// You initialize an empty result object to store the computed values.
-
-// You iterate over each cost in the costs array. For each cost, you create a costItem object containing specific properties (day, sum, description).
-
-// Using the cost.category as the key, you push the costItem into the appropriate category array within the result object. This step helps you group the costs by their category.
-
-// By grouping the costs by category and storing them in the result object, you are computing a transformed representation of the retrieved data. This can be useful for presenting the data in a specific format or for performing further calculations or analysis.
-
-// Overall, your code demonstrates the computed design pattern by performing computations and transforming the retrieved costs data into a structured format (result object) that can be utilized for further processing or responding to client requests.
-  
-
+module.exports = reportRouter; 
 

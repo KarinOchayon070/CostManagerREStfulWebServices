@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
 require('./src/db/db');
 const addCost = require('./src/routes/addcost');
 const about = require('./src/routes/about');

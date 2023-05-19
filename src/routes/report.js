@@ -4,7 +4,7 @@
 */
 
 const express = require("express");
-const costsModel = require("../db/costsmodel"); 
+const costsModel = require("../models/costsmodel"); 
 const { categories } = require("../constants"); 
 const reportValidations = require("../validations/reportvalidations"); 
 
@@ -14,13 +14,9 @@ const reportRouter = express.Router();
 // Handling GET requests to the root path ("/") of the report route.
 reportRouter.get("/", async (req, res, next) => { 
   try {
-    // Validating the request query parameters using the report validations.
-    const validations = reportValidations.validate(req.query); 
-    // If there is a validation error set the status code to 400 (bad request) and throw error.
-    if (validations.error) { 
-      validations.error.status = 400; 
-      throw validations.error; 
-    }
+    // Validating the request query parameters using the report validations. if there is an error throws the error.
+     reportValidations(req.query); 
+
 
     // Retrieving costs from the database based on the query parameters.
     const costs = await costsModel.find(req.query); 
@@ -31,7 +27,7 @@ reportRouter.get("/", async (req, res, next) => {
       throw new Error("No costs found for this specific query"); 
     }
 
-    /* Here is the implmention of the "computed" design pattern.
+    /* Here is the implementation of the "computed" design pattern.
     This code demonstrates the computed design pattern by performing computations and
     transforming the retrieved costs data into a structured format (result object)
     that can be utilized for further processing or responding to client requests.*/

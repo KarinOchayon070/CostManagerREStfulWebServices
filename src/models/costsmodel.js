@@ -9,7 +9,8 @@ const {categories} = require("../constants");
 // This code is defining a Mongoose schema and model for managing costs
 const costsSchema = new mongoose.Schema(
   {
-    user_id: String,
+    id: Number,
+    user_id: Number,
     year: Number,
     month: Number,
     day: Number,

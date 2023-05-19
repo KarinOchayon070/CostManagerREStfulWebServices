@@ -10,7 +10,6 @@ require('./src/db/db');
 const addCost = require('./src/routes/addcost');
 const about = require('./src/routes/about');
 const report = require('./src/routes/report');
-const addUser = require('./src/routes/adduser');
 
 // Creating an instance of the Express application.
 const app = express();
@@ -28,7 +27,6 @@ app.use("/addcost", addCost);
 app.use("/about", about);
 // Registering the report router for the "/report" path.
 app.use("/report", report);
-app.use("/adduser", addUser);
 
 // Error handling middleware: Sends an error response with the error message and status code.
 app.use((err, req, res, next) => {

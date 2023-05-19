@@ -4,9 +4,10 @@
 */
 
 const express = require("express");
-const costsModel = require("../db/costsmodel"); 
-const usersModel = require("../db/usersmodel"); 
+const costsModel = require("../models/costsmodel"); 
+const usersModel = require("../models/usersmodel"); 
 const addCostValidations = require("../validations/addcostvalidations"); 
+const { generateRandomId } = require("../utils");
 
 // Creating an Express router for handling add cost requests.
 const addCostRouter = express.Router(); 
@@ -17,14 +18,8 @@ addCostRouter.post("/", async (req, res, next) => {
   const { user_id } = req.body; 
 
   try {
-    // Validating the request body using the add cost validations.
-    const validations = addCostValidations.validate(req.body); 
-
-    // If there is a validation error Set the status code to 400 (bad request) and throw the validation error.
-    if (validations.error) { 
-      validations.error.status = 400; 
-      throw validations.error; 
-    }
+    // Validating the request body using the add cost validations. if there is an error throws the error.
+    addCostValidations(req.body) 
 
     // Checking if the user exists in the database
     const isUserExist = await usersModel.exists({ user_id }); 
@@ -36,8 +31,18 @@ addCostRouter.post("/", async (req, res, next) => {
       throw error; 
     }
 
+    let id = generateRandomId();
+
+    let isIdExists = await costsModel.exists({ id });
+
+    while (isIdExists) {
+      id = generateRandomId();
+      isIdExists = await costsModel.exists({ id });
+    }
+
+
     // Create a new cost document based on the request body and save it to the database
-    const cost = await new costsModel(req.body).save(); 
+    const cost = await new costsModel({...req.body, id}).save(); 
 
     // Send a JSON response with the saved cost document and pass any caught error to the error-handling middleware
     res.json(cost); 

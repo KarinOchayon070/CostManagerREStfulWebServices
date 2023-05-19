@@ -3,7 +3,7 @@
    - Dor Uzan, 205890510
 */
 
-// This code defines a Mongoose schema and model for a collection called "users" in a MongoDB database.
+// This code defines a Mongoose schema and model for a collection called "users" in a MongoDB database
 
 const mongoose = require("mongoose");
 

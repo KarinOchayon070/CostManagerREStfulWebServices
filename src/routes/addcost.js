@@ -9,16 +9,16 @@ const usersModel = require("../models/usersmodel");
 const addCostValidations = require("../validations/addcostvalidations"); 
 const { generateRandomId } = require("../utils");
 
-// Creating an Express router for handling add cost requests.
+// Creating an Express router for handling add cost requests
 const addCostRouter = express.Router(); 
 
-// Handling POST requests to the root path ("/") of the add cost route.
+// Handling POST requests to the root path ("/") of the add cost route
 addCostRouter.post("/", async (req, res, next) => { 
-  // Extracting the user_id from the request body.
+  // Extracting the user_id from the request body
   const { user_id } = req.body; 
 
   try {
-    // Validating the request body using the add cost validations. if there is an error throws the error.
+    // Validating the request body using the add cost validations. if there is an error throws the error
     addCostValidations(req.body) 
 
     // Checking if the user exists in the database

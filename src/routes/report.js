@@ -8,20 +8,18 @@ const costsModel = require("../models/costsmodel");
 const { categories } = require("../constants"); 
 const reportValidations = require("../validations/reportvalidations"); 
 
-// Creating an Express router for handling report requests.
+// Creating an Express router for handling report requests
 const reportRouter = express.Router(); 
 
-// Handling GET requests to the root path ("/") of the report route.
+// Handling GET requests to the root path ("/") of the report route
 reportRouter.get("/", async (req, res, next) => { 
   try {
-    // Validating the request query parameters using the report validations. if there is an error throws the error.
+    // Validating the request query parameters using the report validations. if there is an error throws the error
      reportValidations(req.query); 
-
-
-    // Retrieving costs from the database based on the query parameters.
+    // Retrieving costs from the database based on the query parameters
     const costs = await costsModel.find(req.query); 
 
-    // If no costs are found set the status code to 400 (bad request) and throw error.
+    // If no costs are found set the status code to 400 (bad request) and throw error
     if (!costs.length) { 
       validations.error.status = 400; 
       throw new Error("No costs found for this specific query"); 
@@ -32,9 +30,9 @@ reportRouter.get("/", async (req, res, next) => {
     transforming the retrieved costs data into a structured format (result object)
     that can be utilized for further processing or responding to client requests.*/
 
-    // Creating an empty object to store the computed result.
+    // Creating an empty object to store the computed result
     const result = {}; 
-    // Iterating through each category and initializing an empty array for each category in the result object.
+    // Iterating through each category and initializing an empty array for each category in the result object
     categories.forEach((category) => { 
       result[category] = []; 
     });

@@ -4,9 +4,6 @@
 */
 const {categories } = require('../constants');
 
-/* Creating a Joi schema for validating the add cost request.
-Joi is a JavaScript library used for data validation. It provides an easy and declarative
-way to define schemas and validate data against those schemas.*/
 const addCostValidations = (body) =>{
     let error;
     const { user_id, year, month, day, description, category, sum } = body;
@@ -44,8 +41,5 @@ const addCostValidations = (body) =>{
         throw error;
     }
 }
-
-
-
 
 module.exports = addCostValidations;

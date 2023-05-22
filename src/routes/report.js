@@ -20,10 +20,11 @@ reportRouter.get("/", async (req, res, next) => {
     const costs = await costsModel.find(req.query); 
 
     // If no costs are found set the status code to 400 (bad request) and throw error
-    if (!costs.length) { 
-      validations.error.status = 400; 
-      throw new Error("No costs found for this specific query"); 
-    }
+    
+    // if (!costs.length) { 
+    //   validations.error.status = 400; 
+    //   throw new Error("No costs found for this specific query"); 
+    // }
 
     /* Here is the implementation of the "computed" design pattern.
     This code demonstrates the computed design pattern by performing computations and

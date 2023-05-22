@@ -21,7 +21,7 @@ addCostRouter.post("/", async (req, res, next) => {
     // Validating the request body using the add cost validations. if there is an error throws the error
     addCostValidations(req.body) 
 
-    // Checking if the user exists in the database
+    // Checking if the user exists in the database (check for the existence of the id that matches the user_id provided in the request body)
     const isUserExist = await usersModel.exists({ id: user_id }); 
 
     // If the user does not exist create new error object and set the status code to 400 (bad request)

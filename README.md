@@ -20,18 +20,18 @@ To get started, we invite you to watch our explanatory video on YouTube - https:
 
 # The following REStful web service endpoints are available for interacting with the application 🔚🟣
   - POST /addcost: Use this endpoint to add a new cost item.
-    For example you can try this in "Postman":
-    post, https://costmanager.onrender.com/addcost, {"user_id": 123124, "day": 12, "month":6, "year": 2023, "description": "pizza", "category": "food", "sum": 50}.
-    Include the following parameters in the request body: sum, category, year, month, day, description, and user_id.
-    The response will be a simple JSON document that describes the added cost, following the same property names.
+     - For example you can try this in "Postman":
+     - post, https://costmanager.onrender.com/addcost, {"user_id": 123124, "day": 12, "month":6, "year": 2023, "description": "pizza", "category": "food", "sum": 50}.
+     - Include the following parameters in the request body: sum, category, year, month, day, description, and user_id.
+     - The response will be a simple JSON document that describes the added cost, following the same property names.
  -  GET /report: This endpoint allows you to retrieve a detailed report for a specific month and year, using the GET method.
-    For example, you can try this: https://costmanager.onrender.com/report?user_id=123123&month=12&year=2019.
-    Include the parameters year, month, and user_id in the request.
-    The returned JSON document will provide an object with properties representing the possible categories.
-    Each property will contain an array of objects describing cost items. All categories, including those without any costs, will be included in the response.
+     - For example, you can try this: https://costmanager.onrender.com/report?user_id=123123&month=12&year=2019.
+     - Include the parameters year, month, and user_id in the request.
+     - The returned JSON document will provide an object with properties representing the possible categories.
+     - Each property will contain an array of objects describing cost items. All categories, including those without any costs, will be included in the response.
  -  GET /about: Use this endpoint to obtain information about the developers involved in this project.
-    For example, https://costmanager.onrender.com/about.
-    It returns a JSON array containing objects that describe each developer.
-    The object properties include firstname, lastname, id, and email.
+     - For example, https://costmanager.onrender.com/about.
+     - It returns a JSON array containing objects that describe each developer.
+     - The object properties include firstname, lastname, id, and email.
 
-Thank you for choosing Cost Manager REStful Web Services. We hope this application helps you efficiently manage your daily costs.
+# Thank you for choosing Cost Manager REStful Web Services. We hope this application helps you efficiently manage your daily costs!

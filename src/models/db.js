@@ -3,6 +3,7 @@
    - Dor Uzan, 205890510
 */
 
+// Importing the mongoose library for MongoDB interaction
 const mongoose = require("mongoose");
 
 // This code is establishing a connection to a MongoDB database using the Mongoose library

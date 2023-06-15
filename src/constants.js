@@ -12,4 +12,6 @@ it as needed.
 */
 const categories = ["food", "health", "housing", "sport", "education", "transportation", "other"];
 
+
+// Exporting the "categories" object as a module
 module.exports = { categories };

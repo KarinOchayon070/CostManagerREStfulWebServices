@@ -3,9 +3,19 @@
    - Dor Uzan, 205890510
 */
 
+// Importing the Express library to create an Express application
 const express = require("express");
+
+// Importing the "costsModel" from the "../models/costsmodel" file
 const costsModel = require("../models/costsmodel"); 
+
+// Importing the "usersModel" from the "../models/usersmodel" file
+const usersModel = require("../models/usersmodel");
+
+// Importing the "categories" object from the "../constants" file
 const { categories } = require("../constants"); 
+
+// Importing the "reportValidations" from the "../validations/reportvalidations" file
 const reportValidations = require("../validations/reportvalidations"); 
 
 // Creating an Express router for handling report requests
@@ -41,6 +51,20 @@ reportRouter.get("/", async (req, res, next) => {
       // Adding the cost item to the corresponding category array in the result object
       result[cost.category].push(costItem); 
     });
+    
+    // Check if the user exists in the usersModel based on the user_id provided in the request query
+    const userExists = await usersModel.exists({ user_id: req.query.user_id });
+
+    // If the user does not exist
+    if (!userExists) {
+      // Create an error response object with the message "User not found"
+      const errorResponse = {
+        error: "User not found",
+      };
+       // Set the response status code to 404 (Not Found) and send the error response as JSON
+      return res.status(404).json(errorResponse);
+    }
+
     // Sending a JSON response with the computed result and Pass any caught error to the error-handling middleware
     res.json(result); 
   } catch (error) {
@@ -48,4 +72,5 @@ reportRouter.get("/", async (req, res, next) => {
   }
 });
 
+ // Exporting the reportRouter as a module
 module.exports = reportRouter; 

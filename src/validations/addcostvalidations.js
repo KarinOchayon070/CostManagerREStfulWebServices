@@ -8,10 +8,14 @@ This code validates properties in the body object, including mandatory fields, n
 and valid categories. If any validation errors occur, it throws an error.
 The function is then exported.
 */
+
+// Importing the "categories" object from the "../constants" file
 const {categories } = require('../constants');
 
 const addCostValidations = (body) =>{
+
     let error;
+
     // Destructures properties (user_id, year, month, day, description, category, sum) from the body object
     const { user_id, year, month, day, description, category, sum } = body;
 
@@ -56,4 +60,5 @@ const addCostValidations = (body) =>{
     }
 }
 
+// Exporting the addCostValidations function as a module
 module.exports = addCostValidations;

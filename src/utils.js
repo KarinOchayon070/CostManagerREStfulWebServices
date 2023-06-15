@@ -13,4 +13,5 @@ const generateRandomId = () => {
   return Math.floor(Math.random() * 1000000);
 };
 
+// Exporting the "generateRandomId" function as a module
 module.exports = { generateRandomId };

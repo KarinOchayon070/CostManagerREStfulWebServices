@@ -3,10 +3,13 @@
    - Dor Uzan, 205890510
 */
 
+// Importing the mongoose library for MongoDB interaction
 const mongoose = require("mongoose");
+
+// Importing the "categories" object from the "../constants" file
 const {categories} = require("../constants");
 
-// This code is defining a Mongoose schema and model for managing costs
+// This code is defining a Mongoose schema 
 const costsSchema = new mongoose.Schema(
   {
     id: Number,
@@ -26,6 +29,8 @@ const costsSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
+// Creating a Mongoose model named "costsModel" for the "costs" collection in the MongoDB database using the defined "costsSchema"
 const costsModel = mongoose.model("costs", costsSchema);
 
+// Exporting the costsModel as a module
 module.exports = costsModel;

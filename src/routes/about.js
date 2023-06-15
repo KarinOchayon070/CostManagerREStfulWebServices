@@ -3,8 +3,7 @@
    - Dor Uzan, 205890510
 */
 
-// This code sets up an Express router for handling requests related to an "about" route
-
+// Importing the Express library to create an Express application
 const express = require("express");
 
 // Create new instance of an Express router
@@ -32,4 +31,5 @@ aboutRouter.get("/", async (req, res) => {
   res.json(developersDetails);
 });
 
+// Exporting the aboutRouter as a module
 module.exports = aboutRouter;

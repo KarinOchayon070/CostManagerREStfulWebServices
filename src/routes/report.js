@@ -53,7 +53,7 @@ reportRouter.get("/", async (req, res, next) => {
     });
     
     // Check if the user exists in the usersModel based on the user_id provided in the request query
-    const userExists = await usersModel.exists({ user_id: req.query.user_id });
+    const userExists = await usersModel.exists({ id: req.query.user_id });
 
     // If the user does not exist
     if (!userExists) {

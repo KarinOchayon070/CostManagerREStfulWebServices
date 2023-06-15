@@ -5,7 +5,6 @@
 
 const express = require("express");
 const costsModel = require("../models/costsmodel"); 
-const usersModel = require("../models/usersmodel");
 const { categories } = require("../constants"); 
 const reportValidations = require("../validations/reportvalidations"); 
 
@@ -19,7 +18,6 @@ reportRouter.get("/", async (req, res, next) => {
      reportValidations(req.query); 
     // Retrieving costs from the database based on the query parameters
     const costs = await costsModel.find(req.query); 
-
 
     /* Here is the implementation of the "computed" design pattern.
     This code demonstrates the computed design pattern by performing computations and
@@ -43,23 +41,6 @@ reportRouter.get("/", async (req, res, next) => {
       // Adding the cost item to the corresponding category array in the result object
       result[cost.category].push(costItem); 
     });
-
-    
-    // Check if the user exists in the usersmodel based on the user_id provided in the request query
-    const userExists = await usersModel.exists({ id: req.query.user_id });
-
-    // If the user does not exist
-    if (!userExists) {
-    // Create an error response object with the message "User not found"
-      const errorResponse = {
-        error: "User not found",
-    };
-
-    // Set the response status code to 404 (Not Found) and send the error response as JSON
-    return res.status(404).json(errorResponse);
-}
-  
-
     // Sending a JSON response with the computed result and Pass any caught error to the error-handling middleware
     res.json(result); 
   } catch (error) {
@@ -68,4 +49,3 @@ reportRouter.get("/", async (req, res, next) => {
 });
 
 module.exports = reportRouter; 
-

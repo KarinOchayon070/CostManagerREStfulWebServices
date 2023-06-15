@@ -5,6 +5,7 @@
 
 const express = require("express");
 const costsModel = require("../models/costsmodel"); 
+const usersModel = require("../models/usersmodel");
 const { categories } = require("../constants"); 
 const reportValidations = require("../validations/reportvalidations"); 
 

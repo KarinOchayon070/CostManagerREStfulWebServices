@@ -42,6 +42,15 @@ reportRouter.get("/", async (req, res, next) => {
       // Adding the cost item to the corresponding category array in the result object
       result[cost.category].push(costItem); 
     });
+
+    if (costs.length === 0) {
+      // User not found, return an error response
+      const errorResponse = {
+        error: "User not found",
+      };
+      return res.status(404).json(errorResponse);
+    }
+
     // Sending a JSON response with the computed result and Pass any caught error to the error-handling middleware
     res.json(result); 
   } catch (error) {

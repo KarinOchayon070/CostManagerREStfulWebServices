@@ -3,6 +3,8 @@
    - Dor Uzan, 205890510
 */
 
+// To use the report endpoint - https://costmanager.onrender.com/report?user_id=123123&month=12&year=2019 (for example)
+
 // Importing the Express library to create an Express application
 const express = require("express");
 

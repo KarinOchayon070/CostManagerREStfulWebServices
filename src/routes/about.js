@@ -3,6 +3,8 @@
    - Dor Uzan, 205890510
 */
 
+// To use the about endpoint  - https://costmanager.onrender.com/about
+
 // Importing the Express library to create an Express application
 const express = require("express");
 

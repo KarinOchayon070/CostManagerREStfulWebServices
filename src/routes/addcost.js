@@ -3,6 +3,13 @@
    - Dor Uzan, 205890510
 */
 
+/* To use the addcost endpoint-
+   you can put this in "Postman" (for example):
+   - post,
+   - https://costmanager.onrender.com/addcost,
+   - {"user_id": 123124, "day": 12, "month":6, "year": 2023, "description": "pizza", "category": "food", "sum": 50}
+ */
+
 // Importing the Express library to create an Express application
 const express = require("express");
 

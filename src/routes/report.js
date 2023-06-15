@@ -44,18 +44,18 @@ reportRouter.get("/", async (req, res, next) => {
     });
 
     
-  // Check if the user exists in the usersmodel based on the user_id provided in the request query
-  const userExists = await usersModel.exists({ user_id: req.query.user_id });
+    // Check if the user exists in the usersmodel based on the user_id provided in the request query
+    const userExists = await usersModel.exists({ user_id: req.query.user_id });
 
-  // If the user does not exist
-  if (!userExists) {
-  // Create an error response object with the message "User not found"
-    const errorResponse = {
-      error: "User not found",
-  };
+    // If the user does not exist
+    if (!userExists) {
+    // Create an error response object with the message "User not found"
+      const errorResponse = {
+        error: "User not found",
+    };
 
-  // Set the response status code to 404 (Not Found) and send the error response as JSON
-  return res.status(404).json(errorResponse);
+    // Set the response status code to 404 (Not Found) and send the error response as JSON
+    return res.status(404).json(errorResponse);
 }
   
 

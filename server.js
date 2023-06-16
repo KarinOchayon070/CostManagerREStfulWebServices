@@ -7,7 +7,7 @@
 const express = require('express');
 
 // Importing the "cors" library to enable Cross-Origin Resource Sharing
-const cors = require('cors');
+//const cors = require('cors');
 
 // Importing the "dotenv" library to load environment variables from a .env file
 require('dotenv').config();
@@ -31,7 +31,7 @@ const app = express();
 const port = 6003;
 
 // Applying CORS middleware for cross-origin requests
-app.use(cors());
+//app.use(cors());
 
 // Parsing incoming requests with JSON payloads
 app.use(express.json());
